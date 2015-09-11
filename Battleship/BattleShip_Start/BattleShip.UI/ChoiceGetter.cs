@@ -9,11 +9,11 @@ namespace BattleShip.UI
     public class ChoiceGetter
     {
 
-//dat
+        //dat
         private bool _isInputValid;
         private const string _invalidInputMessage = "That was not a valid input, please try again...";
         private int _validInt;
-//fn
+        //fn
         public int GetChoice(string inMessage)
         {
             int result = 0;
@@ -53,4 +53,3 @@ namespace BattleShip.UI
         }
     }
 }
-

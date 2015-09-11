@@ -10,23 +10,23 @@ namespace BattleShip.UI
     public class CoordGetter
     {
 
-//dat
+        //dat
         private Coordinate _coordinate { get; set; }
         private const string _alphabet = "ABCDEFGHIJ";
         private bool _isInputValid;
         private const string _invalidInputMessage = "That was not a valid input, please try again...";
         private bool _is2CharLegal = false;
-        private bool _is3CharLegal = false;     
+        private bool _is3CharLegal = false;
         private int _validXCord;
         private int _validYCord;
-      
-// ctor
+
+        // ctor
         public CoordGetter()
         {
             this._coordinate = new Coordinate(0, 0);
         }
 
-//fn
+        //fn
         public Coordinate GetCoord(string inMessgToUser)
         {
             Console.WriteLine();
@@ -37,7 +37,7 @@ namespace BattleShip.UI
 
                 // empty string.IsNullOrEmpty(_userInput) || over three chars
                 if ((string.IsNullOrWhiteSpace(_userInput)) || (_userInput.Length > 3) || (_userInput.Length < 2))
-                    Console.WriteLine(_invalidInputMessage+""); //ref: nullOrEpmty
+                    Console.WriteLine(_invalidInputMessage + ""); //ref: nullOrEpmty
 
 
                 // everything else
@@ -47,7 +47,7 @@ namespace BattleShip.UI
                     {
                         _is2CharLegal = Get2CharLegal(_userInput[0], _userInput[1]);
 
-                        if (!_is2CharLegal) Console.WriteLine(_invalidInputMessage+""); //s2NotValid
+                        if (!_is2CharLegal) Console.WriteLine(_invalidInputMessage + ""); //s2NotValid
 
                         else
                         {
@@ -61,7 +61,7 @@ namespace BattleShip.UI
                     {
                         _is3CharLegal = Get3CharLegal(_userInput[0], _userInput[1], _userInput[2]);
 
-                        if (!_is3CharLegal) Console.WriteLine(_invalidInputMessage+""); //s3NotValid
+                        if (!_is3CharLegal) Console.WriteLine(_invalidInputMessage + ""); //s3NotValid
 
                         else
                         {
@@ -77,17 +77,17 @@ namespace BattleShip.UI
 
             _coordinate.XCoordinate = _validXCord;
             _coordinate.YCoordinate = _validYCord;
-           
+
             return _coordinate;
 
         }
 
-//priv
+        //priv
         // need A-J && 10
         private bool Get3CharLegal(char inChar1, char inChar2, char inChar3)
         {
             char v1 = char.ToUpper(inChar1);
-            int i = v1;           
+            int i = v1;
             if (((i >= 65 && i <= 74) && (inChar2 == '1')) && (inChar3 == '0')) return true;
             return false;
         }

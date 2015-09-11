@@ -27,7 +27,7 @@ namespace BattleShip.UI
                 string _userInput = Console.ReadLine();
 
                 if ((string.IsNullOrWhiteSpace(_userInput)) || (_userInput.Length > 1))
-                    Console.WriteLine(_invalidInputMessage + "ref: nullOrEmptyOr>1");
+                    Console.WriteLine(_invalidInputMessage);
 
                 else
                 {
@@ -59,7 +59,7 @@ namespace BattleShip.UI
                             _isInputValid = true;
                         }
 
-                        else Console.WriteLine(_invalidInputMessage +"input not L,R,U,D");                        
+                        else Console.WriteLine(_invalidInputMessage + "input not L,R,U,D");
                     }
                 }
             }
@@ -71,3 +71,4 @@ namespace BattleShip.UI
 
     }
 }
+

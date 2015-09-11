@@ -16,19 +16,19 @@ namespace BattleShip.UI
 
     public class BattleshipGame
     {
-// dat
+        // dat
         private PlayerDto _p1Dto;
         private PlayerDto _p2Dto;
         private bool _isVictory;
         private int _quit;
-// ctor
+        // ctor
         public BattleshipGame()
         {
             _p1Dto = new PlayerDto();
             _p2Dto = new PlayerDto();
             _quit = 2;
         }
-// fn
+        // fn
         public void PlayGame()
         {
             do
@@ -50,7 +50,7 @@ namespace BattleShip.UI
             } while (_quit == 1);
 
         }
-// priv
+        // priv
         private int AskUser()
         {
             var choiceGetter = new ChoiceGetter();
@@ -59,8 +59,8 @@ namespace BattleShip.UI
 
         private void YourTurnMessageToPlayer(int v)
         {
-            Console.WriteLine("\n Player{0}, its you turn!", v);
-           
+            Console.WriteLine("\n Player{0}, it's your turn!", v);
+
             //Console.WriteLine("\n (Enter shot coordinate as follows: e.g. a1, b6, j10 etc.)");
         }
 
@@ -80,9 +80,11 @@ namespace BattleShip.UI
             {
                 var coordGetter = new CoordGetter();
 
+                //Console.Clear();
+
                 DisplayShotHistory(inDto);
 
-                var coord = coordGetter.GetCoord("> Enter Shot Coord (e.g. a1, b6 etc.) :   ");
+                var coord = coordGetter.GetCoord("> Enter Shot Coord (Ex: a1, b6) :   ");
 
                 var response = inDto.Board.FireShot(coord);
 
@@ -95,6 +97,16 @@ namespace BattleShip.UI
                 if (response.ShotStatus == ShotStatus.Duplicate || response.ShotStatus == ShotStatus.Invalid)
                 {
                     Console.WriteLine("\nThat was not a valid shot, ({0}), Take another shot!", response.ShotStatus.ToString());
+
+                    Console.WriteLine("\n Press Enter to re-take shot...");
+                    Console.ReadLine();
+                    Console.Clear();
+                    Console.WriteLine("\n Shot result: ");
+
+                    //mt
+                    //Console.ReadLine();
+                    //Console.Clear();
+
                 }
 
                 else if (response.ShotStatus == ShotStatus.Miss)
@@ -123,18 +135,19 @@ namespace BattleShip.UI
                 }
             }
         }
-       
+
         private void DisplayShotHistory(PlayerDto inDto)
         {
             var dto = inDto;
 
             Console.WriteLine();
-            string header = " A  B  C  D  E  F  G  H  I  J";
+            string header = " A  B  C  D  E  F  G  H  I  J".PadLeft(33, ' ');
             Console.WriteLine(header);
-            Console.WriteLine("-----------------------------");
+            Console.WriteLine("-----------------------------".PadLeft(33, ' '));
 
             for (int i = 1; i < 11; i++)
             {
+                Console.Write("{0}| ", i.ToString().PadLeft(2, ' '));
                 for (int j = 1; j < 11; j++)
                 {
                     var myCoord = new Coordinate(j, i);
@@ -159,10 +172,12 @@ namespace BattleShip.UI
                     else
                     {
                         Console.Write(" * ");
-                    }               
-                }
+                    }
 
-                Console.Write(" |{0}\n", i);
+                }
+                Console.WriteLine();
+
+                //Console.Write(" |{0}\n", i);
             }
         }
 
@@ -171,26 +186,26 @@ namespace BattleShip.UI
             DisplayBattleship();
             Console.WriteLine("\n*** Players, it's time to set up your boards!\n");
             _p1Dto.Name = GetName(1);
-            Console.WriteLine("\n*** Ship Placement Input \n\n   Coordinates: Enter Letters A - J Horizontally, Numbers 1 - 10 vertically    ");            
+            Console.WriteLine("\n*** Ship Placement Input \n\n   Coordinates: Enter Letters A - J Horizontally, Numbers 1 - 10 Vertically    ");
             PrintShipLenght();
             PlaceShips(_p1Dto);
             Console.WriteLine("\n> Player1 setup complete!, hit enter for Player2 set up...");
             Console.ReadLine();
             Console.Clear();
             _p2Dto.Name = GetName(2);
-            Console.WriteLine("\n*** Ship Placement Input \n\n   Coordinates: Enter Letters A - J Horizontally, Numbers 1 - 10 vertically    ");
+            Console.WriteLine("\n*** Ship Placement Input \n\n   Coordinates: Enter Letters A - J Horizontally, Numbers 1 - 10 Vertically    ");
             PrintShipLenght();
             PlaceShips(_p2Dto);
             Console.WriteLine("\n*** Set up is complete - time to start the game!");
             Console.WriteLine("\n> Press enter to continue...");
-            Console.ReadLine();
+            //Console.ReadLine();
             Console.Clear();
         }
 
         private void PrintShipLenght()
         {
             Console.WriteLine();
-            Console.WriteLine(@"   Ship Type (lenght): 
+            Console.WriteLine(@"   Ship Type (length): 
                        Destroyer(2), 
                        Cruiser(3),
                        Sub(3), 
@@ -267,4 +282,3 @@ namespace BattleShip.UI
         }
     }
 }
-
